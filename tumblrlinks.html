@@ -1,0 +1,32 @@
+<h1>Replace Tinder redirect links</h1>
+
+<script>
+	
+	function changed(){
+		data = document.getElementById("in").value;
+
+		reg = /\"(http\:\/\/t\.umblr\.com([^\"])+)\"/;
+		match = reg.exec(data);
+		while (match != null) {
+			data = data.replace(match[1], fixlink(match[1]))
+			match = reg.exec(data);
+		}
+
+		document.getElementById("out").value = data;
+
+	}
+
+	function fixlink(link){
+		return decodeURIComponent(link.split("redirect?z=")[1].split("&amp;")[0]);
+	}
+
+</script>
+
+
+
+
+Paste to this<br><textarea oninput="changed()" rows=25 cols=200 id="in"></textarea>
+
+<br><br>
+
+Copy from here<br><textarea rows=25 cols=200 id="out"></textarea>
